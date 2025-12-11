@@ -302,7 +302,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (heroVideo.paused) {
         heroVideo.play();
         videoToggleBtn.setAttribute("aria-label", "Pausar animación de fondo");
-        const icon = videoToggleBtn.querySelector("i[data-lucide]");
+        const icon = videoToggleBtn.querySelector("[data-lucide]");
         if (icon) icon.setAttribute("data-lucide", "pause");
       } else {
         heroVideo.pause();
@@ -310,7 +310,7 @@ document.addEventListener("DOMContentLoaded", () => {
           "aria-label",
           "Reanudar animación de fondo"
         );
-        const icon = videoToggleBtn.querySelector("i[data-lucide]");
+        const icon = videoToggleBtn.querySelector("[data-lucide]");
         if (icon) icon.setAttribute("data-lucide", "play");
       }
       if (typeof lucide !== "undefined") {
