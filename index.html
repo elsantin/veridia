@@ -21,8 +21,9 @@
 
 <body class="antialiased bg-dark-primary">
 
-    <div id="scroll-indicator" class="fixed top-0 left-0 z-[60] h-1 bg-gradient-to-r from-accent to-violet-accent"
-        style="width: 0%;"></div>
+    <div id="scroll-indicator" class="fixed top-0 left-0 z-[60] h-1"
+        style="width: 0%; background: linear-gradient(90deg, var(--accent) 0%, var(--violet-accent) 100%); transition: width 0.05s linear;">
+    </div>
 
     <header id="main-header" class="fixed top-0 left-0 right-0 z-50">
         <nav id="main-nav" class="container mx-auto px-6 h-full flex justify-between items-center">
@@ -33,10 +34,26 @@
                 <a href="#approach" data-lang-key="nav_approach" class="nav-link">Nuestro Enfoque</a>
                 <a href="#value" data-lang-key="nav_value" class="nav-link">Valor Potencial</a>
                 <a href="#contact" class="btn btn-outline text-sm px-6 py-2" data-lang-key="nav_contact">Contáctanos</a>
-                <button id="lang-switch" class="btn btn-lang ml-4" aria-label="Switch Language">EN / ES</button>
+                <button id="theme-toggle" class="theme-toggle ml-3" aria-label="Cambiar tema">
+                    <i id="theme-icon-dark" data-lucide="moon" class="hidden"></i>
+                    <i id="theme-icon-light" data-lucide="sun"></i>
+                </button>
+                <button id="lang-switch" class="btn btn-lang ml-3" aria-label="Switch Language">
+                    <span class="lang-option" data-lang="en">EN</span>
+                    <span class="lang-separator">/</span>
+                    <span class="lang-option lang-active" data-lang="es">ES</span>
+                </button>
             </div>
             <div class="md:hidden flex items-center">
-                <button id="lang-switch-mobile" class="btn btn-lang mr-3" aria-label="Switch Language">EN/ES</button>
+                <button id="theme-toggle-mobile" class="theme-toggle mr-2" aria-label="Cambiar tema">
+                    <i data-lucide="moon" class="theme-icon-dark hidden"></i>
+                    <i data-lucide="sun" class="theme-icon-light"></i>
+                </button>
+                <button id="lang-switch-mobile" class="btn btn-lang mr-3" aria-label="Switch Language">
+                    <span class="lang-option" data-lang="en">EN</span>
+                    <span class="lang-separator">/</span>
+                    <span class="lang-option lang-active" data-lang="es">ES</span>
+                </button>
                 <button id="mobile-menu-button" class="text-menu-icon hover:text-white focus:outline-none">
                     <i id="menu-icon-open" data-lucide="menu" class="w-6 h-6"></i>
                     <i id="menu-icon-close" data-lucide="x" class="w-6 h-6 hidden"></i>
@@ -350,10 +367,9 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
                     <!-- Orquestación -->
                     <div class="stack-category p-6 rounded-xl card fade-in-reveal" style="transition-delay: 0.2s;">
-                        <div class="flex items-center mb-4">
-                            <i data-lucide="workflow" class="w-6 h-6 text-accent mr-3 stroke-[1.5]"></i>
-                            <h3 class="text-lg font-medium text-white" data-lang-key="stack_cat1_title">Orquestación
-                            </h3>
+                        <div class="stack-header">
+                            <i data-lucide="workflow" class="stack-icon"></i>
+                            <h3 class="stack-title" data-lang-key="stack_cat1_title">Orquestación</h3>
                         </div>
                         <div class="flex flex-wrap gap-2">
                             <span class="stack-tag">Make</span>
@@ -365,10 +381,9 @@
 
                     <!-- Bases de Datos -->
                     <div class="stack-category p-6 rounded-xl card fade-in-reveal" style="transition-delay: 0.3s;">
-                        <div class="flex items-center mb-4">
-                            <i data-lucide="database" class="w-6 h-6 text-accent mr-3 stroke-[1.5]"></i>
-                            <h3 class="text-lg font-medium text-white" data-lang-key="stack_cat2_title">Bases de Datos
-                            </h3>
+                        <div class="stack-header">
+                            <i data-lucide="database" class="stack-icon"></i>
+                            <h3 class="stack-title" data-lang-key="stack_cat2_title">Bases de Datos</h3>
                         </div>
                         <div class="flex flex-wrap gap-2">
                             <span class="stack-tag">Airtable</span>
@@ -380,9 +395,9 @@
 
                     <!-- Canales -->
                     <div class="stack-category p-6 rounded-xl card fade-in-reveal" style="transition-delay: 0.4s;">
-                        <div class="flex items-center mb-4">
-                            <i data-lucide="message-square" class="w-6 h-6 text-accent mr-3 stroke-[1.5]"></i>
-                            <h3 class="text-lg font-medium text-white" data-lang-key="stack_cat3_title">Canales</h3>
+                        <div class="stack-header">
+                            <i data-lucide="message-square" class="stack-icon"></i>
+                            <h3 class="stack-title" data-lang-key="stack_cat3_title">Canales</h3>
                         </div>
                         <div class="flex flex-wrap gap-2">
                             <span class="stack-tag">Email</span>
@@ -394,9 +409,9 @@
 
                     <!-- Analítica -->
                     <div class="stack-category p-6 rounded-xl card fade-in-reveal" style="transition-delay: 0.5s;">
-                        <div class="flex items-center mb-4">
-                            <i data-lucide="bar-chart-3" class="w-6 h-6 text-accent mr-3 stroke-[1.5]"></i>
-                            <h3 class="text-lg font-medium text-white" data-lang-key="stack_cat4_title">Analítica</h3>
+                        <div class="stack-header">
+                            <i data-lucide="bar-chart-3" class="stack-icon"></i>
+                            <h3 class="stack-title" data-lang-key="stack_cat4_title">Analítica</h3>
                         </div>
                         <div class="flex flex-wrap gap-2">
                             <span class="stack-tag">Looker Studio</span>
@@ -440,67 +455,88 @@
                             </div>
                         </div>
 
-                        <!-- Flow Steps -->
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                        <!-- Flow Steps with Timeline -->
+                        <div class="use-case-timeline mb-10">
+                            <!-- Single continuous dot line behind all nodes -->
+                            <div class="timeline-dots-line">
+                                <span class="connector-dot"></span>
+                                <span class="connector-dot"></span>
+                                <span class="connector-dot"></span>
+                                <span class="connector-dot"></span>
+                                <span class="connector-dot"></span>
+                                <span class="connector-dot"></span>
+                                <span class="connector-dot"></span>
+                                <span class="connector-dot"></span>
+                                <span class="connector-dot"></span>
+                                <span class="connector-dot"></span>
+                                <span class="connector-dot"></span>
+                                <span class="connector-dot"></span>
+                                <span class="connector-dot"></span>
+                                <span class="connector-dot"></span>
+                                <span class="connector-dot"></span>
+                            </div>
+
                             <!-- Step 1: Trigger -->
-                            <div class="use-case-step">
-                                <div class="flex items-center mb-3">
-                                    <span
-                                        class="w-8 h-8 rounded-full bg-accent/20 text-accent flex items-center justify-center text-sm font-semibold mr-3">1</span>
-                                    <span class="text-xs uppercase tracking-wider text-text-subtle"
-                                        data-lang-key="usecase_step1_label">Disparador</span>
+                            <div class="timeline-step">
+                                <div class="timeline-node timeline-node-accent">
+                                    <span class="timeline-number">1</span>
                                 </div>
-                                <h4 class="text-white font-medium mb-2" data-lang-key="usecase_step1_title">Nuevo Lead
-                                    Capturado</h4>
-                                <p class="text-sm text-text-medium" data-lang-key="usecase_step1_desc">Formulario web,
-                                    email o integración CRM detecta un nuevo prospecto.</p>
+                                <div class="timeline-content">
+                                    <span class="timeline-label" data-lang-key="usecase_step1_label">Disparador</span>
+                                    <h4 class="timeline-title" data-lang-key="usecase_step1_title">Nuevo Lead Capturado
+                                    </h4>
+                                    <p class="timeline-desc" data-lang-key="usecase_step1_desc">Formulario web, email o
+                                        integración CRM detecta un nuevo prospecto.</p>
+                                </div>
                             </div>
 
                             <!-- Step 2: Process -->
-                            <div class="use-case-step">
-                                <div class="flex items-center mb-3">
-                                    <span
-                                        class="w-8 h-8 rounded-full bg-violet-accent/20 text-violet-accent flex items-center justify-center text-sm font-semibold mr-3">2</span>
-                                    <span class="text-xs uppercase tracking-wider text-text-subtle"
-                                        data-lang-key="usecase_step2_label">Proceso</span>
+                            <div class="timeline-step">
+                                <div class="timeline-node timeline-node-violet">
+                                    <span class="timeline-number">2</span>
                                 </div>
-                                <h4 class="text-white font-medium mb-2" data-lang-key="usecase_step2_title">
-                                    Enriquecimiento + Scoring</h4>
-                                <p class="text-sm text-text-medium" data-lang-key="usecase_step2_desc">IA analiza el
-                                    lead, asigna puntuación y categoriza automáticamente.</p>
+                                <div class="timeline-content">
+                                    <span class="timeline-label" data-lang-key="usecase_step2_label">Proceso</span>
+                                    <h4 class="timeline-title" data-lang-key="usecase_step2_title">Enriquecimiento +
+                                        Scoring</h4>
+                                    <p class="timeline-desc" data-lang-key="usecase_step2_desc">IA analiza el lead,
+                                        asigna puntuación y categoriza automáticamente.</p>
+                                </div>
                             </div>
 
                             <!-- Step 3: Action -->
-                            <div class="use-case-step">
-                                <div class="flex items-center mb-3">
-                                    <span
-                                        class="w-8 h-8 rounded-full bg-accent/20 text-accent flex items-center justify-center text-sm font-semibold mr-3">3</span>
-                                    <span class="text-xs uppercase tracking-wider text-text-subtle"
-                                        data-lang-key="usecase_step3_label">Acción</span>
+                            <div class="timeline-step">
+                                <div class="timeline-node timeline-node-accent">
+                                    <span class="timeline-number">3</span>
                                 </div>
-                                <h4 class="text-white font-medium mb-2" data-lang-key="usecase_step3_title">Notificación
-                                    + Seguimiento</h4>
-                                <p class="text-sm text-text-medium" data-lang-key="usecase_step3_desc">Alerta al equipo
-                                    de ventas, crea tarea en CRM y envía email personalizado.</p>
+                                <div class="timeline-content">
+                                    <span class="timeline-label" data-lang-key="usecase_step3_label">Acción</span>
+                                    <h4 class="timeline-title" data-lang-key="usecase_step3_title">Notificación +
+                                        Seguimiento</h4>
+                                    <p class="timeline-desc" data-lang-key="usecase_step3_desc">Alerta al equipo de
+                                        ventas, crea tarea en CRM y envía email personalizado.</p>
+                                </div>
                             </div>
                         </div>
 
-                        <!-- Results -->
-                        <div class="grid grid-cols-3 gap-4 pt-6 border-t border-white/10">
-                            <div class="text-center">
-                                <span class="text-2xl md:text-3xl font-bold text-accent">85%</span>
-                                <p class="text-xs text-text-medium mt-1" data-lang-key="usecase_metric1">Menos tiempo
-                                    manual</p>
+                        <!-- KPI Badges -->
+                        <div class="kpi-grid">
+                            <div class="kpi-badge kpi-badge-accent">
+                                <i data-lucide="trending-down" class="kpi-icon"></i>
+                                <span class="kpi-value">85%</span>
+                                <span class="kpi-label" data-lang-key="usecase_metric1">Menos tiempo
+                                    manual</span>
                             </div>
-                            <div class="text-center">
-                                <span class="text-2xl md:text-3xl font-bold text-violet-accent">3x</span>
-                                <p class="text-xs text-text-medium mt-1" data-lang-key="usecase_metric2">Velocidad de
-                                    respuesta</p>
+                            <div class="kpi-badge kpi-badge-violet">
+                                <i data-lucide="zap" class="kpi-icon"></i>
+                                <span class="kpi-value">3x</span>
+                                <span class="kpi-label" data-lang-key="usecase_metric2">Velocidad de
+                                    respuesta</span>
                             </div>
-                            <div class="text-center">
-                                <span class="text-2xl md:text-3xl font-bold text-accent">0</span>
-                                <p class="text-xs text-text-medium mt-1" data-lang-key="usecase_metric3">Leads perdidos
-                                </p>
+                            <div class="kpi-badge kpi-badge-accent">
+                                <i data-lucide="shield-check" class="kpi-icon"></i>
+                                <span class="kpi-value">0</span>
+                                <span class="kpi-label" data-lang-key="usecase_metric3">Leads perdidos</span>
                             </div>
                         </div>
                     </div>

@@ -89,17 +89,32 @@ Archivos principales:
    - Beneficios clave: eficiencia radical, reducción de costos, crecimiento escalable.
    - CTA secundaria para estimar impacto.
 
-7. **Contacto (`#contact`)**
+7. **Stack / Ecosistema Tecnológico (`#stack`)**
+
+   - Cuatro categorías de herramientas low-code/no-code:
+     - Orquestación (Make, Zapier, n8n, Pabbly)
+     - Bases de Datos (Airtable, Notion, Supabase, Google Sheets)
+     - Canales (Email, Slack, WhatsApp, Teams)
+     - Analítica (Looker Studio, Dashboards, Reportes)
+
+8. **Caso de Uso (`#use-case`)**
+
+   - Ejemplo práctico: Gestión Automatizada de Leads.
+   - Timeline visual con 3 pasos (Disparador → Proceso → Acción).
+   - KPI badges con métricas de impacto (85% menos tiempo, 3x velocidad, 0 leads perdidos).
+
+9. **Contacto (`#contact`)**
 
    - Formulario con campos: nombre, email, empresa opcional, desafío/interés.
    - Mensaje de contacto por email (`hola@veridia.com`).
 
-8. **Footer**
-   - Resumen de marca.
-   - Links a secciones y capacidades.
-   - Email de contacto.
-   - Año dinámico y enlaces a política de privacidad y términos.
-   - Canvas con animación de fondo.
+10. **Footer**
+
+- Resumen de marca.
+- Links a secciones y capacidades.
+- Email de contacto.
+- Año dinámico y enlaces a política de privacidad y términos.
+- Canvas con animación de fondo.
 
 ---
 
@@ -110,16 +125,27 @@ Archivos principales:
 - **`script.js`** controla:
   - Sistema de **traducciones** (`translations` en ES/EN) usando `data-lang-key` en los elementos.
   - Botones de cambio de idioma (desktop y móvil) que alternan `currentLang` y actualizan el contenido.
+  - **Toggle de tema claro/oscuro** con persistencia en localStorage.
   - Menú móvil (abre/cierra el panel y alterna iconos de menú/hamburguesa).
   - Smooth scroll con compensación de la altura del header.
   - Animaciones de aparición (`.fade-in-reveal` + IntersectionObserver).
   - Indicador de scroll superior y estado "link activo" en el menú según la sección visible.
   - Animación del canvas en el footer (partículas).
 
+### Sistema de Temas (Light/Dark Mode)
+
+- **Atributo `data-theme`** en el `<html>`: valores `"dark"` (default) o `"light"`.
+- **Variables CSS** definidas en `:root` para dark mode y en `[data-theme="light"]` para light mode.
+- **Toggle buttons** en header (desktop y mobile) con iconos sun/moon de Lucide.
+- **Persistencia** en `localStorage` bajo la clave `theme`.
+- Al cambiar tema, se actualizan los iconos y se re-inicializa Lucide Icons.
+
 **Importante para agentes IA:**
 
 - No romper el sistema de `data-lang-key` ni sobrescribirlo con texto plano sin clave.
 - Mantener la estructura de IDs de secciones (`#home`, `#services`, etc.) porque se usan para navegación, scroll y estado activo del menú.
+- **Respetar el sistema de temas**: usar variables CSS (`var(--nombre)`) en lugar de colores hardcodeados.
+- Si se añaden nuevos elementos, verificar que tengan buen contraste en **ambos modos** (dark y light).
 
 ---
 

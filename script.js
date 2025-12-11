@@ -2,10 +2,75 @@
 /* =============== INICIO JAVASCRIPT ================= */
 /* =================================================== */
 
+// --- Theme Management ---
+function initTheme() {
+  const savedTheme = localStorage.getItem("veridia-theme");
+  const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+  const theme = savedTheme || (prefersDark ? "dark" : "light");
+  setTheme(theme);
+}
+
+function setTheme(theme) {
+  document.documentElement.setAttribute("data-theme", theme);
+  localStorage.setItem("veridia-theme", theme);
+  updateThemeIcons(theme);
+}
+
+function updateThemeIcons(theme) {
+  const isDark = theme === "dark";
+
+  // Desktop icons
+  const darkIcon = document.getElementById("theme-icon-dark");
+  const lightIcon = document.getElementById("theme-icon-light");
+  if (darkIcon && lightIcon) {
+    darkIcon.classList.toggle("hidden", isDark);
+    lightIcon.classList.toggle("hidden", !isDark);
+  }
+
+  // Mobile icons
+  document.querySelectorAll(".theme-icon-dark").forEach((el) => {
+    el.classList.toggle("hidden", isDark);
+  });
+  document.querySelectorAll(".theme-icon-light").forEach((el) => {
+    el.classList.toggle("hidden", !isDark);
+  });
+}
+
+function toggleTheme() {
+  const current = document.documentElement.getAttribute("data-theme") || "dark";
+  const newTheme = current === "dark" ? "light" : "dark";
+  setTheme(newTheme);
+
+  // Re-initialize Lucide icons after theme change
+  if (typeof lucide !== "undefined") {
+    lucide.createIcons();
+  }
+  updateThemeIcons(newTheme);
+}
+
+// Initialize theme immediately to prevent flash
+initTheme();
+
 // --- Initialize Lucide Icons ---
 document.addEventListener("DOMContentLoaded", () => {
   if (typeof lucide !== "undefined") {
     lucide.createIcons();
+  }
+
+  // Update icons after DOM is ready
+  const currentTheme =
+    document.documentElement.getAttribute("data-theme") || "dark";
+  updateThemeIcons(currentTheme);
+
+  // Theme toggle event listeners
+  const themeToggle = document.getElementById("theme-toggle");
+  const themeToggleMobile = document.getElementById("theme-toggle-mobile");
+
+  if (themeToggle) {
+    themeToggle.addEventListener("click", toggleTheme);
+  }
+  if (themeToggleMobile) {
+    themeToggleMobile.addEventListener("click", toggleTheme);
   }
 });
 
@@ -288,6 +353,21 @@ function setLanguage(lang) {
 function toggleLanguage() {
   const newLang = currentLang === "es" ? "en" : "es";
   setLanguage(newLang);
+  updateLangToggleState(newLang);
+}
+
+/**
+ * Updates the visual state of language toggle buttons.
+ * @param {string} lang - The active language code ('en' or 'es').
+ */
+function updateLangToggleState(lang) {
+  document.querySelectorAll(".lang-option").forEach((option) => {
+    if (option.getAttribute("data-lang") === lang) {
+      option.classList.add("lang-active");
+    } else {
+      option.classList.remove("lang-active");
+    }
+  });
 }
 // --- Hero Video Controls, Sticky CTA and Back-to-Top ---
 document.addEventListener("DOMContentLoaded", () => {
@@ -805,10 +885,21 @@ document.addEventListener("DOMContentLoaded", () => {
     if (scrollIndicator) {
       const totalScroll =
         document.documentElement.scrollHeight -
-        document.documentElement.clientHeight; // Total scrollable height
-      const scrollPercentage =
+        document.documentElement.clientHeight;
+      // Calculate percentage with precision
+      let scrollPercentage =
         totalScroll > 0 ? (scrollTop / totalScroll) * 100 : 0;
-      scrollIndicator.style.width = `${Math.min(scrollPercentage, 100)}%`; // Update width
+      // Ensure it reaches exactly 100% at the bottom
+      if (
+        window.innerHeight + window.scrollY >=
+        document.documentElement.scrollHeight - 2
+      ) {
+        scrollPercentage = 100;
+      }
+      scrollIndicator.style.width = `${Math.min(
+        Math.max(scrollPercentage, 0),
+        100
+      )}%`;
     }
 
     // Active Link Logic
@@ -818,8 +909,8 @@ document.addEventListener("DOMContentLoaded", () => {
   // Initial call to set states on page load
   handleScroll();
 
-  // Add throttled scroll listener
-  window.addEventListener("scroll", throttle(handleScroll, 100)); // Throttle to 100ms
+  // Add throttled scroll listener (16ms = ~60fps for smooth indicator)
+  window.addEventListener("scroll", throttle(handleScroll, 16));
 }); // End DOMContentLoaded
 
 // --- Actions on Window Load ---
