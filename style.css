@@ -476,6 +476,19 @@ header#main-header.header-scrolled {
   background: rgba(8, 8, 12, 0.95);
 }
 
+/* Footer layout tweaks for mobile */
+.footer-grid {
+  align-items: flex-start;
+}
+@media (max-width: 767px) {
+  .footer-brand {
+    margin-bottom: 1.5rem;
+  }
+  .footer-grid {
+    row-gap: 1.75rem;
+  }
+}
+
 /* --- Buttons --- */
 .btn {
   transition: all 0.35s cubic-bezier(0.23, 1, 0.32, 1);
