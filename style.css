@@ -150,7 +150,7 @@
   --header-shadow: rgba(0, 0, 0, 0.08);
 
   /* Hero - Lighter overlay for video */
-  --hero-overlay-bg: rgba(248, 249, 252, 0.75);
+  --hero-overlay-bg: rgba(248, 249, 252, 0.6);
 
   /* Footer */
   --footer-bg: #f0f2f7;
@@ -189,21 +189,43 @@
 
 /* Light mode specific overrides */
 [data-theme="light"] .hero-subtitle {
-  color: rgba(13, 13, 26, 0.85);
-  text-shadow: 0 2px 20px rgba(255, 255, 255, 0.5);
+  color: rgba(255, 255, 255, 0.9);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }
 [data-theme="light"] .hero-headline,
 [data-theme="light"] .hero-section-with-image h1 {
-  color: #0d0d1a;
+  color: #ffffff;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
 }
 [data-theme="light"] .hero-section-with-image .text-accent {
-  color: var(--accent);
+  color: var(--accent-lighter); /* Lighter cyan pops better on video */
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8), 0 4px 20px rgba(0, 0, 0, 0.4); /* "Senior" technique: Tight dark shadow for definition + soft shadow for lift */
 }
 [data-theme="light"] .hero-trust-copy {
-  color: rgba(13, 13, 26, 0.7);
+  background: linear-gradient(
+    90deg,
+    var(--accent-darker) 0%,
+    var(--violet-accent) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: var(--accent-darker); /* Fallback */
+  font-weight: 600;
+  text-shadow: none;
+  filter: none;
 }
 [data-theme="light"] .hero-scroll-cue {
-  color: rgba(13, 13, 26, 0.6);
+  background: linear-gradient(
+    90deg,
+    var(--accent-darker) 0%,
+    var(--violet-accent) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: var(--accent-darker);
+  font-weight: 600;
 }
 [data-theme="light"] .logo-text {
   background: linear-gradient(
@@ -1244,7 +1266,8 @@ header#main-header.header-scrolled {
   .timeline-dots-line {
     display: flex;
     position: absolute;
-    top: calc(1.25rem + 1rem);
+    top: 3rem; /* padding (1.25) + half-node (1.75) = 3rem. */
+    bottom: auto; /* CRITICAL: Reset mobile bottom constraint to prevent stretching */
     left: 14%;
     right: 14%;
     flex-direction: row;
@@ -1350,6 +1373,8 @@ header#main-header.header-scrolled {
   position: relative;
   z-index: 2;
   transition: all 0.3s var(--transition-smooth);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
 }
 .timeline-node-accent {
   background: rgba(0, 200, 255, 0.15);
