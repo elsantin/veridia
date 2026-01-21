@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es" id="html-lang">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,7 +8,8 @@
 
     <script src="https://cdn.tailwindcss.com"></script>
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Lucide Icons - Sleek, minimal line icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
 
     <link rel="stylesheet" href="style.css">
 
@@ -16,9 +18,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
 </head>
+
 <body class="antialiased bg-dark-primary">
 
-    <div id="scroll-indicator" class="fixed top-0 left-0 z-[60] h-1 bg-gradient-to-r from-accent to-violet-accent" style="width: 0%;"></div>
+    <div id="scroll-indicator" class="fixed top-0 left-0 z-[60] h-1"
+        style="width: 0%; background: linear-gradient(90deg, var(--accent) 0%, var(--violet-accent) 100%); transition: width 0.05s linear;">
+    </div>
 
     <header id="main-header" class="fixed top-0 left-0 right-0 z-50">
         <nav id="main-nav" class="container mx-auto px-6 h-full flex justify-between items-center">
@@ -29,177 +34,269 @@
                 <a href="#approach" data-lang-key="nav_approach" class="nav-link">Nuestro Enfoque</a>
                 <a href="#value" data-lang-key="nav_value" class="nav-link">Valor Potencial</a>
                 <a href="#contact" class="btn btn-outline text-sm px-6 py-2" data-lang-key="nav_contact">Contáctanos</a>
-                <button id="lang-switch" class="btn btn-lang ml-4" aria-label="Switch Language">EN / ES</button>
+                <button id="theme-toggle" class="theme-toggle ml-3" aria-label="Cambiar tema">
+                    <i id="theme-icon-dark" data-lucide="moon" class="hidden"></i>
+                    <i id="theme-icon-light" data-lucide="sun"></i>
+                </button>
+                <button id="lang-switch" class="btn btn-lang ml-3" aria-label="Switch Language">
+                    <span class="lang-option" data-lang="en">EN</span>
+                    <span class="lang-separator">/</span>
+                    <span class="lang-option lang-active" data-lang="es">ES</span>
+                </button>
             </div>
             <div class="md:hidden flex items-center">
-                 <button id="lang-switch-mobile" class="btn btn-lang mr-3" aria-label="Switch Language">EN/ES</button>
+                <button id="theme-toggle-mobile" class="theme-toggle mr-2" aria-label="Cambiar tema">
+                    <i data-lucide="moon" class="theme-icon-dark hidden"></i>
+                    <i data-lucide="sun" class="theme-icon-light"></i>
+                </button>
+                <button id="lang-switch-mobile" class="btn btn-lang mr-3" aria-label="Switch Language">
+                    <span class="lang-option" data-lang="en">EN</span>
+                    <span class="lang-separator">/</span>
+                    <span class="lang-option lang-active" data-lang="es">ES</span>
+                </button>
                 <button id="mobile-menu-button" class="text-menu-icon hover:text-white focus:outline-none">
-                    <i id="menu-icon-open" class="fas fa-bars fa-fw"></i>
-                    <i id="menu-icon-close" class="fas fa-times fa-fw hidden"></i>
+                    <i id="menu-icon-open" data-lucide="menu" class="w-6 h-6"></i>
+                    <i id="menu-icon-close" data-lucide="x" class="w-6 h-6 hidden"></i>
                 </button>
             </div>
         </nav>
         <div id="mobile-menu" class="hidden md:hidden bg-dropdown shadow-lg border-t border-dark-line">
-             <div id="mobile-menu-links">
-                 <a href="#home" class="block px-5 py-3 nav-link-mobile" data-lang-key="nav_home">Inicio</a>
-                 <a href="#services" class="block px-5 py-3 nav-link-mobile" data-lang-key="nav_services">Servicios</a>
-                 <a href="#approach" class="block px-5 py-3 nav-link-mobile" data-lang-key="nav_approach">Nuestro Enfoque</a>
-                 <a href="#value" class="block px-5 py-3 nav-link-mobile" data-lang-key="nav_value">Valor Potencial</a>
-                 <a href="#contact" class="block px-5 py-3 nav-link-mobile" data-lang-key="nav_contact">Contáctanos</a>
+            <div id="mobile-menu-links">
+                <a href="#home" class="block px-5 py-3 nav-link-mobile" data-lang-key="nav_home">Inicio</a>
+                <a href="#services" class="block px-5 py-3 nav-link-mobile" data-lang-key="nav_services">Servicios</a>
+                <a href="#approach" class="block px-5 py-3 nav-link-mobile" data-lang-key="nav_approach">Nuestro
+                    Enfoque</a>
+                <a href="#value" class="block px-5 py-3 nav-link-mobile" data-lang-key="nav_value">Valor Potencial</a>
+                <a href="#contact" class="block px-5 py-3 nav-link-mobile" data-lang-key="nav_contact">Contáctanos</a>
             </div>
         </div>
     </header>
 
     <main style="padding-top: var(--header-height);">
-        <section id="home" class="hero-section-with-image relative overflow-hidden flex items-center justify-center text-center text-white">
-            <img src="hero-veridia.png" alt="Fondo abstracto con flujos de datos luminosos" onerror="this.onerror=null; this.src='https://placehold.co/1920x1080/0a0a0f/e0e0e0?text=Hero+Image+Not+Found';" class="absolute inset-0 w-full h-full object-cover z-0 hero-bg-image">
+        <section id="home"
+            class="hero-section-with-image relative overflow-hidden flex items-center justify-center text-center text-white">
+            <video src="hero-loop.mp4" class="absolute inset-0 w-full h-full object-cover z-0 hero-bg-image" autoplay
+                muted loop playsinline poster="hero-veridia.png">
+            </video>
             <div class="absolute inset-0 hero-overlay z-10"></div>
             <div class="container mx-auto px-6 relative z-20 pt-24 md:pt-32 pb-24 md:pb-32">
-                <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-6 hero-headline fade-in-reveal" data-lang-key="hero_title">
+                <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-6 hero-headline fade-in-reveal"
+                    data-lang-key="hero_title">
                     Eficiencia y Futuro. <span class="text-accent">Automatizados.</span>
                 </h1>
-                <p class="text-lg md:text-xl hero-subtitle mb-12 max-w-2xl mx-auto fade-in-reveal" style="transition-delay: 0.15s;" data-lang-key="hero_subtitle">Veridia diseña e implementa soluciones de automatización inteligente que transforman tu operación y potencian tu crecimiento.</p>
-                <a href="#contact" class="btn btn-accent text-lg px-10 py-4 inline-block fade-in-reveal" style="transition-delay: 0.3s;" data-lang-key="hero_cta">Iniciar Consulta</a>
+                <p class="text-lg md:text-xl hero-subtitle mb-10 max-w-2xl mx-auto fade-in-reveal"
+                    style="transition-delay: 0.15s;" data-lang-key="hero_subtitle">Veridia diseña e implementa
+                    soluciones de automatización inteligente que transforman tu operación y potencian tu crecimiento.
+                </p>
+                <a href="#contact" class="btn btn-accent text-lg px-10 py-4 inline-block fade-in-reveal"
+                    style="transition-delay: 0.3s;" data-lang-key="hero_cta">Iniciar Consulta</a>
+                <p class="hero-trust-copy mt-4 text-sm text-section-subtitle fade-in-reveal"
+                    style="transition-delay: 0.4s;" data-lang-key="hero_trust_copy">Sin compromiso inicial. Diseñamos un
+                    diagnóstico orientado a ROI.</p>
+            </div>
+
+            <!-- Hero Controls: Pause Button & Scroll Cue -->
+            <button id="hero-video-toggle" class="hero-video-toggle" aria-label="Pausar animación de fondo">
+                <i data-lucide="pause" class="w-4 h-4 stroke-[2]"></i>
+            </button>
+
+            <div class="hero-scroll-cue fade-in-reveal" style="transition-delay: 0.5s;">
+                <span class="hero-scroll-text" data-lang-key="hero_scroll_text">Desliza para ver más</span>
+                <i data-lucide="chevron-down" class="w-5 h-5 mt-1 stroke-[2]"></i>
             </div>
         </section>
+
+        <!-- Sticky CTA (Desktop) -->
+        <button id="sticky-cta" class="sticky-cta hidden md:flex items-center"
+            aria-label="Ir al formulario de contacto">
+            <span data-lang-key="sticky_cta_label">Iniciar consulta</span>
+        </button>
+
+        <!-- Back to Top Button -->
+        <button id="back-to-top" class="back-to-top" aria-label="Volver al inicio">
+            <i data-lucide="arrow-up" class="w-4 h-4 stroke-[2]"></i>
+        </button>
 
         <section id="problems" class="py-20 md:py-28 section-bg">
             <div class="container mx-auto px-6">
                 <div class="title-wrapper mb-5 fade-in-reveal">
-                     <h2 class="section-title text-3xl md:text-4xl font-bold" data-lang-key="problems_title">Supera los Límites Operativos</h2>
+                    <h2 class="section-title text-3xl md:text-4xl font-bold" data-lang-key="problems_title">Supera los
+                        Límites Operativos</h2>
                 </div>
-                <p class="text-center text-section-subtitle mb-16 max-w-2xl mx-auto fade-in-reveal" style="transition-delay: 0.1s;" data-lang-key="problems_subtitle">Identifica las barreras que frenan tu progreso y descubre cómo la automatización las derriba.</p>
+                <p class="text-center text-section-subtitle mb-16 max-w-2xl mx-auto fade-in-reveal"
+                    style="transition-delay: 0.1s;" data-lang-key="problems_subtitle">Identifica las barreras que frenan
+                    tu progreso y descubre cómo la automatización las derriba.</p>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-10">
                     <div class="p-8 rounded-xl card fade-in-reveal text-center" style="transition-delay: 0.2s;">
                         <div class="text-4xl mb-5 card-icon inline-block">
-                           <i class="fas fa-clock fa-fw"></i>
+                            <i data-lucide="clock" class="w-10 h-10 stroke-[1.5]"></i>
                         </div>
-                        <h3 class="card-title text-xl font-semibold mb-3" data-lang-key="problem1_title">Procesos Manuales Lentos</h3>
-                        <p class="card-text text-sm leading-relaxed" data-lang-key="problem1_desc">Libera a tu equipo de tareas repetitivas y propensas a errores.</p>
+                        <h3 class="card-title text-xl font-semibold mb-3" data-lang-key="problem1_title">Procesos
+                            Manuales Lentos</h3>
+                        <p class="card-text text-sm leading-relaxed" data-lang-key="problem1_desc">Libera a tu equipo de
+                            tareas repetitivas y propensas a errores.</p>
                     </div>
                     <div class="p-8 rounded-xl card fade-in-reveal text-center" style="transition-delay: 0.3s;">
                         <div class="text-4xl mb-5 card-icon inline-block">
-                           <i class="fas fa-dollar-sign fa-fw"></i>
+                            <i data-lucide="trending-down" class="w-10 h-10 stroke-[1.5]"></i>
                         </div>
-                        <h3 class="card-title text-xl font-semibold mb-3" data-lang-key="problem2_title">Costos Operativos Altos</h3>
-                        <p class="card-text text-sm leading-relaxed" data-lang-key="problem2_desc">Optimiza recursos y reduce gastos innecesarios con eficiencia.</p>
+                        <h3 class="card-title text-xl font-semibold mb-3" data-lang-key="problem2_title">Costos
+                            Operativos Altos</h3>
+                        <p class="card-text text-sm leading-relaxed" data-lang-key="problem2_desc">Optimiza recursos y
+                            reduce gastos innecesarios con eficiencia.</p>
                     </div>
                     <div class="p-8 rounded-xl card fade-in-reveal text-center" style="transition-delay: 0.4s;">
-                         <div class="text-4xl mb-5 card-icon inline-block">
-                             <i class="fas fa-link-slash fa-fw"></i> </div>
-                        <h3 class="card-title text-xl font-semibold mb-3" data-lang-key="problem3_title">Sistemas Desconectados</h3>
-                        <p class="card-text text-sm leading-relaxed" data-lang-key="problem3_desc">Integra tus plataformas para una visión completa y datos unificados.</p>
+                        <div class="text-4xl mb-5 card-icon inline-block">
+                            <i data-lucide="unplug" class="w-10 h-10 stroke-[1.5]"></i>
+                        </div>
+                        <h3 class="card-title text-xl font-semibold mb-3" data-lang-key="problem3_title">Sistemas
+                            Desconectados</h3>
+                        <p class="card-text text-sm leading-relaxed" data-lang-key="problem3_desc">Integra tus
+                            plataformas para una visión completa y datos unificados.</p>
                     </div>
                 </div>
             </div>
         </section>
 
         <section id="services" class="py-20 md:py-28 section-bg">
-             <div class="container mx-auto px-6">
-                  <div class="title-wrapper mb-16 fade-in-reveal">
-                      <h2 class="section-title text-3xl md:text-4xl font-bold" data-lang-key="services_title">Soluciones de Automatización Inteligente</h2>
-                  </div>
-                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-10">
-                     <div id="service-ipa" class="text-center p-8 rounded-xl card fade-in-reveal" style="transition-delay: 0.1s;">
-                         <div class="text-5xl mb-5 card-icon">
-                            <i class="fas fa-bolt-lightning fa-fw"></i> </div>
-                         <h3 class="card-title text-xl font-semibold mb-3" data-lang-key="service1_title">IPA</h3>
-                         <p class="card-text text-sm leading-relaxed" data-lang-key="service1_desc">Orquestación de flujos complejos con IA.</p>
-                     </div>
-                     <div id="service-rpa" class="text-center p-8 rounded-xl card fade-in-reveal" style="transition-delay: 0.2s;">
-                          <div class="text-5xl mb-5 card-icon">
-                             <i class="fas fa-robot fa-fw"></i>
-                          </div>
-                         <h3 class="card-title text-xl font-semibold mb-3" data-lang-key="service2_title">RPA Avanzado</h3>
-                         <p class="card-text text-sm leading-relaxed" data-lang-key="service2_desc">Bots adaptables para tareas críticas.</p>
-                     </div>
-                     <div id="service-ai" class="text-center p-8 rounded-xl card fade-in-reveal" style="transition-delay: 0.3s;">
-                          <div class="text-5xl mb-5 card-icon">
-                              <i class="fas fa-brain fa-fw"></i>
-                          </div>
-                         <h3 class="card-title text-xl font-semibold mb-3" data-lang-key="service3_title">Integración IA</h3>
-                         <p class="card-text text-sm leading-relaxed" data-lang-key="service3_desc">Insights con Machine Learning y analítica.</p>
-                     </div>
-                     <div id="service-cs" class="text-center p-8 rounded-xl card fade-in-reveal" style="transition-delay: 0.4s;">
-                          <div class="text-5xl mb-5 card-icon">
-                              <i class="fas fa-layer-group fa-fw"></i>
-                          </div>
-                         <h3 class="card-title text-xl font-semibold mb-3" data-lang-key="service4_title">Soluciones a Medida</h3>
-                         <p class="card-text text-sm leading-relaxed" data-lang-key="service4_desc">Desarrollo único para desafíos específicos.</p>
-                     </div>
-                 </div>
-             </div>
-         </section>
+            <div class="container mx-auto px-6">
+                <div class="title-wrapper mb-16 fade-in-reveal">
+                    <h2 class="section-title text-3xl md:text-4xl font-bold" data-lang-key="services_title">Soluciones
+                        de Automatización Inteligente</h2>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-10">
+                    <div id="service-ipa" class="text-center p-8 rounded-xl card fade-in-reveal"
+                        style="transition-delay: 0.1s;">
+                        <div class="text-5xl mb-5 card-icon">
+                            <i data-lucide="zap" class="w-12 h-12 stroke-[1.5]"></i>
+                        </div>
+                        <h3 class="card-title text-xl font-semibold mb-3" data-lang-key="service1_title">IPA</h3>
+                        <p class="card-text text-sm leading-relaxed" data-lang-key="service1_desc">Orquestación de
+                            flujos complejos con IA.</p>
+                    </div>
+                    <div id="service-rpa" class="text-center p-8 rounded-xl card fade-in-reveal"
+                        style="transition-delay: 0.2s;">
+                        <div class="text-5xl mb-5 card-icon">
+                            <i data-lucide="bot" class="w-12 h-12 stroke-[1.5]"></i>
+                        </div>
+                        <h3 class="card-title text-xl font-semibold mb-3" data-lang-key="service2_title">RPA Avanzado
+                        </h3>
+                        <p class="card-text text-sm leading-relaxed" data-lang-key="service2_desc">Bots adaptables para
+                            tareas críticas.</p>
+                    </div>
+                    <div id="service-ai" class="text-center p-8 rounded-xl card fade-in-reveal"
+                        style="transition-delay: 0.3s;">
+                        <div class="text-5xl mb-5 card-icon">
+                            <i data-lucide="brain-circuit" class="w-12 h-12 stroke-[1.5]"></i>
+                        </div>
+                        <h3 class="card-title text-xl font-semibold mb-3" data-lang-key="service3_title">Integración IA
+                        </h3>
+                        <p class="card-text text-sm leading-relaxed" data-lang-key="service3_desc">Insights con Machine
+                            Learning y analítica.</p>
+                    </div>
+                    <div id="service-cs" class="text-center p-8 rounded-xl card fade-in-reveal"
+                        style="transition-delay: 0.4s;">
+                        <div class="text-5xl mb-5 card-icon">
+                            <i data-lucide="layers" class="w-12 h-12 stroke-[1.5]"></i>
+                        </div>
+                        <h3 class="card-title text-xl font-semibold mb-3" data-lang-key="service4_title">Soluciones a
+                            Medida</h3>
+                        <p class="card-text text-sm leading-relaxed" data-lang-key="service4_desc">Desarrollo único para
+                            desafíos específicos.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
 
         <section id="approach" class="py-20 md:py-28 section-bg overflow-hidden">
             <div class="container mx-auto px-6">
                 <div class="max-w-4xl mx-auto text-center">
                     <div class="mb-12 fade-in-reveal approach-svg-container">
-                        <svg id="approach-process-svg" viewBox="0 0 800 200" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+                        <svg id="approach-process-svg" viewBox="0 0 800 200" preserveAspectRatio="xMidYMid meet"
+                            xmlns="http://www.w3.org/2000/svg">
                             <defs>
                                 <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
                                     <stop offset="0%" style="stop-color:var(--violet-accent); stop-opacity:1" />
                                     <stop offset="100%" style="stop-color:var(--accent); stop-opacity:1" />
                                 </linearGradient>
                             </defs>
-                            <path id="connecting-line"
-                                  d="M 100 100 Q 250 70 400 100 T 700 100"
-                                  stroke="url(#lineGradient)" stroke-width="2" fill="none" stroke-dasharray="5, 5" />
+                            <path id="connecting-line" d="M 100 100 Q 250 70 400 100 T 700 100"
+                                stroke="url(#lineGradient)" stroke-width="2" fill="none" stroke-dasharray="5, 5" />
                             <g class="approach-step" transform="translate(100, 100)">
-                                <circle cx="0" cy="0" r="25" class="step-circle"/>
-                                <path class="step-icon-path" d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"/>
+                                <circle cx="0" cy="0" r="25" class="step-circle" />
+                                <path class="step-icon-path"
+                                    d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z" />
                                 <text x="0" y="50" class="step-text" data-lang-key="approach_step1">Diagnóstico</text>
                             </g>
-                             <g class="approach-step" transform="translate(250, 90)">
-                                <circle cx="0" cy="0" r="25" class="step-circle"/>
-                                <path class="step-icon-path" d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"/>
+                            <g class="approach-step" transform="translate(250, 90)">
+                                <circle cx="0" cy="0" r="25" class="step-circle" />
+                                <path class="step-icon-path"
+                                    d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z" />
                                 <text x="0" y="50" class="step-text" data-lang-key="approach_step2">Diseño ROI</text>
                             </g>
                             <g class="approach-step" transform="translate(400, 100)">
-                                <circle cx="0" cy="0" r="25" class="step-circle"/>
-                                <path class="step-icon-path" d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"/>
-                                <text x="0" y="50" class="step-text" data-lang-key="approach_step3">Implementación</text>
+                                <circle cx="0" cy="0" r="25" class="step-circle" />
+                                <path class="step-icon-path"
+                                    d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z" />
+                                <text x="0" y="50" class="step-text"
+                                    data-lang-key="approach_step3">Implementación</text>
                             </g>
-                             <g class="approach-step" transform="translate(550, 105)">
-                                <circle cx="0" cy="0" r="25" class="step-circle"/>
-                                <path class="step-icon-path" d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"/>
+                            <g class="approach-step" transform="translate(550, 105)">
+                                <circle cx="0" cy="0" r="25" class="step-circle" />
+                                <path class="step-icon-path"
+                                    d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z" />
                                 <text x="0" y="50" class="step-text" data-lang-key="approach_step4">Tecnología</text>
                             </g>
                             <g class="approach-step" transform="translate(700, 100)">
-                                <circle cx="0" cy="0" r="25" class="step-circle"/>
-                                <path class="step-icon-path" d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"/>
+                                <circle cx="0" cy="0" r="25" class="step-circle" />
+                                <path class="step-icon-path"
+                                    d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z" />
                                 <text x="0" y="50" class="step-text" data-lang-key="approach_step5">Soporte</text>
                             </g>
                         </svg>
                     </div>
 
                     <div class="fade-in-reveal" style="transition-delay: 0.2s;">
-                        <span class="text-accent font-semibold text-sm uppercase tracking-wider" data-lang-key="approach_tag">Metodología Veridia</span>
-                         <div class="title-wrapper mt-2 mb-6">
-                              <h2 class="section-title text-3xl md:text-4xl font-bold" data-lang-key="approach_title">Colaboración Estratégica, Resultados Medibles</h2>
-                         </div>
-                        <p class="text-section-subtitle mb-8 text-lg leading-relaxed max-w-2xl mx-auto" data-lang-key="approach_subtitle">Nos integramos con tu equipo para diseñar e implementar la hoja de ruta de automatización perfecta, enfocada en tus objetivos clave.</p>
+                        <span class="text-accent font-semibold text-sm uppercase tracking-wider"
+                            data-lang-key="approach_tag">Metodología Veridia</span>
+                        <div class="title-wrapper mt-2 mb-6">
+                            <h2 class="section-title text-3xl md:text-4xl font-bold" data-lang-key="approach_title">
+                                Colaboración Estratégica, Resultados Medibles</h2>
+                        </div>
+                        <p class="text-section-subtitle mb-8 text-lg leading-relaxed max-w-2xl mx-auto"
+                            data-lang-key="approach_subtitle">Nos integramos con tu equipo para diseñar e implementar la
+                            hoja de ruta de automatización perfecta, enfocada en tus objetivos clave.</p>
                         <ul class="space-y-3 text-list max-w-md mx-auto text-left">
                             <li class="flex items-start approach-list-item">
-                                <i class="fas fa-check-circle text-accent list-icon-fa mr-3 mt-1 flex-shrink-0"></i>
-                                <span data-lang-key="approach_item1"><strong class="list-strong">Diagnóstico Profundo:</strong> Entendimiento completo de tus procesos y potencial.</span>
+                                <i data-lucide="check-circle-2"
+                                    class="w-5 h-5 text-accent mr-3 mt-0.5 flex-shrink-0 stroke-[1.5]"></i>
+                                <span data-lang-key="approach_item1"><strong class="list-strong">Diagnóstico
+                                        Profundo:</strong> Entendimiento completo de tus procesos y potencial.</span>
                             </li>
                             <li class="flex items-start approach-list-item">
-                                 <i class="fas fa-check-circle text-accent list-icon-fa mr-3 mt-1 flex-shrink-0"></i>
-                                <span data-lang-key="approach_item2"><strong class="list-strong">Diseño Centrado en ROI:</strong> Soluciones a medida para un impacto máximo.</span>
+                                <i data-lucide="check-circle-2"
+                                    class="w-5 h-5 text-accent mr-3 mt-0.5 flex-shrink-0 stroke-[1.5]"></i>
+                                <span data-lang-key="approach_item2"><strong class="list-strong">Diseño Centrado en
+                                        ROI:</strong> Soluciones a medida para un impacto máximo.</span>
                             </li>
                             <li class="flex items-start approach-list-item">
-                                <i class="fas fa-check-circle text-accent list-icon-fa mr-3 mt-1 flex-shrink-0"></i>
-                                <span data-lang-key="approach_item3"><strong class="list-strong">Implementación Ágil:</strong> Entrega iterativa y transparente.</span>
+                                <i data-lucide="check-circle-2"
+                                    class="w-5 h-5 text-accent mr-3 mt-0.5 flex-shrink-0 stroke-[1.5]"></i>
+                                <span data-lang-key="approach_item3"><strong class="list-strong">Implementación
+                                        Ágil:</strong> Entrega iterativa y transparente.</span>
                             </li>
-                             <li class="flex items-start approach-list-item">
-                                 <i class="fas fa-check-circle text-accent list-icon-fa mr-3 mt-1 flex-shrink-0"></i>
-                                <span data-lang-key="approach_item4"><strong class="list-strong">Tecnología de Vanguardia:</strong> Uso inteligente de las mejores herramientas.</span>
-                             </li>
-                             <li class="flex items-start approach-list-item">
-                                 <i class="fas fa-check-circle text-accent list-icon-fa mr-3 mt-1 flex-shrink-0"></i>
-                                <span data-lang-key="approach_item5"><strong class="list-strong">Soporte Continuo:</strong> Acompañamiento en la optimización y evolución.</span>
-                             </li>
+                            <li class="flex items-start approach-list-item">
+                                <i data-lucide="check-circle-2"
+                                    class="w-5 h-5 text-accent mr-3 mt-0.5 flex-shrink-0 stroke-[1.5]"></i>
+                                <span data-lang-key="approach_item4"><strong class="list-strong">Tecnología de
+                                        Vanguardia:</strong> Uso inteligente de las mejores herramientas.</span>
+                            </li>
+                            <li class="flex items-start approach-list-item">
+                                <i data-lucide="check-circle-2"
+                                    class="w-5 h-5 text-accent mr-3 mt-0.5 flex-shrink-0 stroke-[1.5]"></i>
+                                <span data-lang-key="approach_item5"><strong class="list-strong">Soporte
+                                        Continuo:</strong> Acompañamiento en la optimización y evolución.</span>
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -208,131 +305,378 @@
 
         <section id="value" class="py-20 md:py-28 section-bg">
             <div class="container mx-auto px-6 text-center">
-                 <div class="title-wrapper mb-5 fade-in-reveal">
-                     <h2 class="section-title text-3xl md:text-4xl font-bold" data-lang-key="value_title">Transformación Medible</h2>
-                 </div>
-                <p class="text-lg text-section-subtitle mb-16 max-w-3xl mx-auto fade-in-reveal" style="transition-delay: 0.1s;" data-lang-key="value_subtitle">La automatización inteligente genera valor real y cuantificable para tu negocio.</p>
+                <div class="title-wrapper mb-5 fade-in-reveal">
+                    <h2 class="section-title text-3xl md:text-4xl font-bold" data-lang-key="value_title">Transformación
+                        Medible</h2>
+                </div>
+                <p class="text-lg text-section-subtitle mb-16 max-w-3xl mx-auto fade-in-reveal"
+                    style="transition-delay: 0.1s;" data-lang-key="value_subtitle">La automatización inteligente genera
+                    valor real y cuantificable para tu negocio.</p>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-10">
                     <div class="p-8 rounded-xl card fade-in-reveal text-center" style="transition-delay: 0.2s;">
                         <div class="text-5xl mb-5 card-icon inline-block">
-                           <i class="fas fa-rocket fa-fw"></i>
+                            <i data-lucide="gauge" class="w-12 h-12 stroke-[1.5]"></i>
                         </div>
-                        <h3 class="card-title text-xl font-semibold mb-3" data-lang-key="value1_title">Eficiencia Radical</h3>
-                        <p class="card-text text-sm leading-relaxed" data-lang-key="value1_desc">Aceleración de procesos y liberación de recursos.</p>
+                        <h3 class="card-title text-xl font-semibold mb-3" data-lang-key="value1_title">Eficiencia
+                            Radical</h3>
+                        <p class="card-text text-sm leading-relaxed" data-lang-key="value1_desc">Aceleración de procesos
+                            y liberación de recursos.</p>
                     </div>
                     <div class="p-8 rounded-xl card fade-in-reveal text-center" style="transition-delay: 0.3s;">
                         <div class="text-5xl mb-5 card-icon inline-block">
-                             <i class="fas fa-piggy-bank fa-fw"></i>
+                            <i data-lucide="piggy-bank" class="w-12 h-12 stroke-[1.5]"></i>
                         </div>
-                        <h3 class="card-title text-xl font-semibold mb-3" data-lang-key="value2_title">Reducción de Costos</h3>
-                        <p class="card-text text-sm leading-relaxed" data-lang-key="value2_desc">Optimización de gastos y mejora de rentabilidad.</p>
+                        <h3 class="card-title text-xl font-semibold mb-3" data-lang-key="value2_title">Reducción de
+                            Costos</h3>
+                        <p class="card-text text-sm leading-relaxed" data-lang-key="value2_desc">Optimización de gastos
+                            y mejora de rentabilidad.</p>
                     </div>
                     <div class="p-8 rounded-xl card fade-in-reveal text-center" style="transition-delay: 0.4s;">
                         <div class="text-5xl mb-5 card-icon inline-block">
-                             <i class="fas fa-chart-line fa-fw"></i>
+                            <i data-lucide="trending-up" class="w-12 h-12 stroke-[1.5]"></i>
                         </div>
-                        <h3 class="card-title text-xl font-semibold mb-3" data-lang-key="value3_title">Crecimiento Escalable</h3>
-                        <p class="card-text text-sm leading-relaxed" data-lang-key="value3_desc">Capacidad para expandirse sin limitations operativas.</p>
+                        <h3 class="card-title text-xl font-semibold mb-3" data-lang-key="value3_title">Crecimiento
+                            Escalable</h3>
+                        <p class="card-text text-sm leading-relaxed" data-lang-key="value3_desc">Capacidad para
+                            expandirse sin limitations operativas.</p>
                     </div>
                 </div>
                 <div class="mt-16 fade-in-reveal" style="transition-delay: 0.5s;">
-                     <a href="#contact" class="btn btn-accent text-lg px-10 py-4 inline-block" data-lang-key="value_cta">Estimar Impacto</a>
+                    <a href="#contact" class="btn btn-accent text-lg px-10 py-4 inline-block"
+                        data-lang-key="value_cta">Estimar Impacto</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stack / Tecnologías Section -->
+        <section id="stack" class="py-20 md:py-28 section-bg">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16">
+                    <span class="text-accent font-semibold text-sm uppercase tracking-wider fade-in-reveal"
+                        data-lang-key="stack_tag">Ecosistema Tecnológico</span>
+                    <div class="title-wrapper mt-2 mb-5 fade-in-reveal" style="transition-delay: 0.1s;">
+                        <h2 class="section-title text-3xl md:text-4xl font-bold" data-lang-key="stack_title">
+                            Herramientas que Potencian tu Negocio</h2>
+                    </div>
+                    <p class="text-section-subtitle max-w-2xl mx-auto fade-in-reveal" style="transition-delay: 0.2s;"
+                        data-lang-key="stack_subtitle">Trabajamos con las mejores plataformas low-code y no-code para
+                        crear soluciones rápidas, escalables y sin fricciones técnicas.</p>
+                </div>
+
+                <!-- Stack Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+                    <!-- Orquestación -->
+                    <div class="stack-category p-6 rounded-xl card fade-in-reveal" style="transition-delay: 0.2s;">
+                        <div class="stack-header">
+                            <i data-lucide="workflow" class="stack-icon"></i>
+                            <h3 class="stack-title" data-lang-key="stack_cat1_title">Orquestación</h3>
+                        </div>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="stack-tag">Make</span>
+                            <span class="stack-tag">Zapier</span>
+                            <span class="stack-tag">n8n</span>
+                            <span class="stack-tag">Pabbly</span>
+                        </div>
+                    </div>
+
+                    <!-- Bases de Datos -->
+                    <div class="stack-category p-6 rounded-xl card fade-in-reveal" style="transition-delay: 0.3s;">
+                        <div class="stack-header">
+                            <i data-lucide="database" class="stack-icon"></i>
+                            <h3 class="stack-title" data-lang-key="stack_cat2_title">Bases de Datos</h3>
+                        </div>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="stack-tag">Airtable</span>
+                            <span class="stack-tag">Notion</span>
+                            <span class="stack-tag">Supabase</span>
+                            <span class="stack-tag">Google Sheets</span>
+                        </div>
+                    </div>
+
+                    <!-- Canales -->
+                    <div class="stack-category p-6 rounded-xl card fade-in-reveal" style="transition-delay: 0.4s;">
+                        <div class="stack-header">
+                            <i data-lucide="message-square" class="stack-icon"></i>
+                            <h3 class="stack-title" data-lang-key="stack_cat3_title">Canales</h3>
+                        </div>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="stack-tag">Email</span>
+                            <span class="stack-tag">Slack</span>
+                            <span class="stack-tag">WhatsApp</span>
+                            <span class="stack-tag">Teams</span>
+                        </div>
+                    </div>
+
+                    <!-- Analítica -->
+                    <div class="stack-category p-6 rounded-xl card fade-in-reveal" style="transition-delay: 0.5s;">
+                        <div class="stack-header">
+                            <i data-lucide="bar-chart-3" class="stack-icon"></i>
+                            <h3 class="stack-title" data-lang-key="stack_cat4_title">Analítica</h3>
+                        </div>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="stack-tag">Looker Studio</span>
+                            <span class="stack-tag">Dashboards</span>
+                            <span class="stack-tag">Reportes</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Caso de Uso Section -->
+        <section id="use-case" class="py-20 md:py-28 section-bg">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16">
+                    <span class="text-violet-accent font-semibold text-sm uppercase tracking-wider fade-in-reveal"
+                        data-lang-key="usecase_tag">Caso de Uso</span>
+                    <div class="title-wrapper mt-2 mb-5 fade-in-reveal" style="transition-delay: 0.1s;">
+                        <h2 class="section-title text-3xl md:text-4xl font-bold" data-lang-key="usecase_title">
+                            Automatización en Acción</h2>
+                    </div>
+                    <p class="text-section-subtitle max-w-2xl mx-auto fade-in-reveal" style="transition-delay: 0.2s;"
+                        data-lang-key="usecase_subtitle">Un ejemplo real de cómo transformamos procesos manuales en
+                        flujos inteligentes.</p>
+                </div>
+
+                <!-- Use Case Flow -->
+                <div class="max-w-4xl mx-auto">
+                    <div class="use-case-card p-8 md:p-10 rounded-2xl fade-in-reveal" style="transition-delay: 0.3s;">
+                        <!-- Header -->
+                        <div class="flex items-center justify-between mb-8 pb-6 border-b border-white/10">
+                            <div>
+                                <span class="text-accent text-sm font-medium uppercase tracking-wider"
+                                    data-lang-key="usecase_example_tag">Ejemplo</span>
+                                <h3 class="text-2xl font-semibold text-white mt-1"
+                                    data-lang-key="usecase_example_title">Gestión Automatizada de Leads</h3>
+                            </div>
+                            <div class="hidden md:flex items-center gap-2 text-sm text-text-medium">
+                                <i data-lucide="clock" class="w-4 h-4 stroke-[1.5]"></i>
+                                <span data-lang-key="usecase_time">Implementación: 2-3 semanas</span>
+                            </div>
+                        </div>
+
+                        <!-- Flow Steps with Timeline -->
+                        <div class="use-case-timeline mb-10">
+                            <!-- Single continuous dot line behind all nodes -->
+                            <div class="timeline-dots-line">
+                                <span class="connector-dot"></span>
+                                <span class="connector-dot"></span>
+                                <span class="connector-dot"></span>
+                                <span class="connector-dot"></span>
+                                <span class="connector-dot"></span>
+                                <span class="connector-dot"></span>
+                                <span class="connector-dot"></span>
+                                <span class="connector-dot"></span>
+                                <span class="connector-dot"></span>
+                                <span class="connector-dot"></span>
+                                <span class="connector-dot"></span>
+                                <span class="connector-dot"></span>
+                                <span class="connector-dot"></span>
+                                <span class="connector-dot"></span>
+                                <span class="connector-dot"></span>
+                            </div>
+
+                            <!-- Step 1: Trigger -->
+                            <div class="timeline-step">
+                                <div class="timeline-node timeline-node-accent">
+                                    <span class="timeline-number">1</span>
+                                </div>
+                                <div class="timeline-content">
+                                    <span class="timeline-label" data-lang-key="usecase_step1_label">Disparador</span>
+                                    <h4 class="timeline-title" data-lang-key="usecase_step1_title">Nuevo Lead Capturado
+                                    </h4>
+                                    <p class="timeline-desc" data-lang-key="usecase_step1_desc">Formulario web, email o
+                                        integración CRM detecta un nuevo prospecto.</p>
+                                </div>
+                            </div>
+
+                            <!-- Step 2: Process -->
+                            <div class="timeline-step">
+                                <div class="timeline-node timeline-node-violet">
+                                    <span class="timeline-number">2</span>
+                                </div>
+                                <div class="timeline-content">
+                                    <span class="timeline-label" data-lang-key="usecase_step2_label">Proceso</span>
+                                    <h4 class="timeline-title" data-lang-key="usecase_step2_title">Enriquecimiento +
+                                        Scoring</h4>
+                                    <p class="timeline-desc" data-lang-key="usecase_step2_desc">IA analiza el lead,
+                                        asigna puntuación y categoriza automáticamente.</p>
+                                </div>
+                            </div>
+
+                            <!-- Step 3: Action -->
+                            <div class="timeline-step">
+                                <div class="timeline-node timeline-node-accent">
+                                    <span class="timeline-number">3</span>
+                                </div>
+                                <div class="timeline-content">
+                                    <span class="timeline-label" data-lang-key="usecase_step3_label">Acción</span>
+                                    <h4 class="timeline-title" data-lang-key="usecase_step3_title">Notificación +
+                                        Seguimiento</h4>
+                                    <p class="timeline-desc" data-lang-key="usecase_step3_desc">Alerta al equipo de
+                                        ventas, crea tarea en CRM y envía email personalizado.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- KPI Badges -->
+                        <div class="kpi-grid">
+                            <div class="kpi-badge kpi-badge-accent">
+                                <i data-lucide="trending-down" class="kpi-icon"></i>
+                                <span class="kpi-value">85%</span>
+                                <span class="kpi-label" data-lang-key="usecase_metric1">Menos tiempo
+                                    manual</span>
+                            </div>
+                            <div class="kpi-badge kpi-badge-violet">
+                                <i data-lucide="zap" class="kpi-icon"></i>
+                                <span class="kpi-value">3x</span>
+                                <span class="kpi-label" data-lang-key="usecase_metric2">Velocidad de
+                                    respuesta</span>
+                            </div>
+                            <div class="kpi-badge kpi-badge-accent">
+                                <i data-lucide="shield-check" class="kpi-icon"></i>
+                                <span class="kpi-value">0</span>
+                                <span class="kpi-label" data-lang-key="usecase_metric3">Leads perdidos</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
 
         <section id="contact" class="py-20 md:py-28 contact-section">
-                <div class="container mx-auto px-6 text-center">
-                    <div class="title-wrapper mb-5 fade-in-reveal">
-                        <h2 class="section-title text-3xl md:text-4xl font-bold" data-lang-key="contact_title">Inicia la Conversación</h2>
-                    </div>
-                    <p class="text-lg mb-10 max-w-2xl mx-auto text-section-subtitle fade-in-reveal" style="transition-delay: 0.1s;" data-lang-key="contact_subtitle">Descubre cómo Veridia puede diseñar la solución de automatización perfecta para tu empresa.</p>
-                    <div class="max-w-xl mx-auto bg-form border border-form-border p-8 md:p-10 rounded-xl shadow-2xl text-left text-form-text fade-in-reveal" style="transition-delay: 0.2s;">
-                        <form action="#" method="POST" id="contact-form"> <div class="mb-5">
-                                <label for="name" class="block text-sm font-medium form-label mb-1.5" data-lang-key="form_name">Nombre</label>
-                                <input type="text" id="name" name="name" required class="form-input w-full px-4 py-3 border border-input-border rounded-md focus:ring-2 focus:ring-accent focus:border-transparent transition placeholder-input-placeholder" placeholder="Tu Nombre Completo" data-lang-key="form_name_placeholder">
-                            </div>
-                            <div class="mb-5">
-                                <label for="email" class="block text-sm font-medium form-label mb-1.5" data-lang-key="form_email">Correo Electrónico</label>
-                                <input type="email" id="email" name="email" required class="form-input w-full px-4 py-3 border border-input-border rounded-md focus:ring-2 focus:ring-accent focus:border-transparent transition placeholder-input-placeholder" placeholder="tu.correo@empresa.com" data-lang-key="form_email_placeholder">
-                            </div>
-                            <div class="mb-5">
-                                <label for="company" class="block text-sm font-medium form-label mb-1.5" data-lang-key="form_company">Empresa (Opcional)</label>
-                                <input type="text" id="company" name="company" class="form-input w-full px-4 py-3 border border-input-border rounded-md focus:ring-2 focus:ring-accent focus:border-transparent transition placeholder-input-placeholder" placeholder="Nombre de tu Compañía" data-lang-key="form_company_placeholder">
-                            </div>
-                            <div class="mb-6">
-                                <label for="message" class="block text-sm font-medium form-label mb-1.5" data-lang-key="form_message">Tu principal desafío o interés</label>
-                                <textarea id="message" name="message" rows="4" required class="form-input w-full px-4 py-3 border border-input-border rounded-md focus:ring-2 focus:ring-accent focus:border-transparent transition placeholder-input-placeholder" placeholder="Ej: Optimizar facturación, explorar IA para análisis..." data-lang-key="form_message_placeholder"></textarea>
-                            </div>
-                            <div class="text-center">
-                                <button type="submit" class="btn btn-accent font-semibold px-10 py-3 w-full md:w-auto" data-lang-key="form_submit">Enviar Mensaje</button>
-                            </div>
-                        </form>
-                         <div id="form-status" class="mt-4 text-center text-sm"></div>
-                    </div>
-                    <div class="mt-10 text-center text-contact-prompt fade-in-reveal" style="transition-delay: 0.3s;">
-                        <p data-lang-key="contact_email_prompt">O contáctanos vía email: <a href="mailto:hola@veridia.com" class="font-semibold link-accent hover:text-accent-darker transition duration-300">hola@veridia.com</a></p>
-                    </div>
+            <div class="container mx-auto px-6 text-center">
+                <div class="title-wrapper mb-5 fade-in-reveal">
+                    <h2 class="section-title text-3xl md:text-4xl font-bold" data-lang-key="contact_title">Inicia la
+                        Conversación</h2>
                 </div>
-            </section>
+                <p class="text-lg mb-10 max-w-2xl mx-auto text-section-subtitle fade-in-reveal"
+                    style="transition-delay: 0.1s;" data-lang-key="contact_subtitle">Descubre cómo Veridia puede diseñar
+                    la solución de automatización perfecta para tu empresa.</p>
+                <div class="max-w-xl mx-auto bg-form border border-form-border p-8 md:p-10 rounded-xl shadow-2xl text-left text-form-text fade-in-reveal"
+                    style="transition-delay: 0.2s;">
+                    <form action="#" method="POST" id="contact-form">
+                        <div class="mb-5">
+                            <label for="name" class="block text-sm font-medium form-label mb-1.5"
+                                data-lang-key="form_name">Nombre</label>
+                            <input type="text" id="name" name="name" required
+                                class="form-input w-full px-4 py-3 border border-input-border rounded-md focus:ring-2 focus:ring-accent focus:border-transparent transition placeholder-input-placeholder"
+                                placeholder="Tu Nombre Completo" data-lang-key="form_name_placeholder">
+                        </div>
+                        <div class="mb-5">
+                            <label for="email" class="block text-sm font-medium form-label mb-1.5"
+                                data-lang-key="form_email">Correo Electrónico</label>
+                            <input type="email" id="email" name="email" required
+                                class="form-input w-full px-4 py-3 border border-input-border rounded-md focus:ring-2 focus:ring-accent focus:border-transparent transition placeholder-input-placeholder"
+                                placeholder="tu.correo@empresa.com" data-lang-key="form_email_placeholder">
+                        </div>
+                        <div class="mb-5">
+                            <label for="company" class="block text-sm font-medium form-label mb-1.5"
+                                data-lang-key="form_company">Empresa (Opcional)</label>
+                            <input type="text" id="company" name="company"
+                                class="form-input w-full px-4 py-3 border border-input-border rounded-md focus:ring-2 focus:ring-accent focus:border-transparent transition placeholder-input-placeholder"
+                                placeholder="Nombre de tu Compañía" data-lang-key="form_company_placeholder">
+                        </div>
+                        <div class="mb-6">
+                            <label for="message" class="block text-sm font-medium form-label mb-1.5"
+                                data-lang-key="form_message">Tu principal desafío o interés</label>
+                            <textarea id="message" name="message" rows="4" required
+                                class="form-input w-full px-4 py-3 border border-input-border rounded-md focus:ring-2 focus:ring-accent focus:border-transparent transition placeholder-input-placeholder"
+                                placeholder="Ej: Optimizar facturación, explorar IA para análisis..."
+                                data-lang-key="form_message_placeholder"></textarea>
+                        </div>
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-accent font-semibold px-10 py-3 w-full md:w-auto"
+                                data-lang-key="form_submit">Enviar Mensaje</button>
+                        </div>
+                    </form>
+                    <div id="form-status" class="mt-4 text-center text-sm"></div>
+                </div>
+                <div class="mt-10 text-center text-contact-prompt fade-in-reveal" style="transition-delay: 0.3s;">
+                    <p data-lang-key="contact_email_prompt">O contáctanos vía email: <a href="mailto:hola@veridia.com"
+                            class="font-semibold link-accent hover:text-accent-darker transition duration-300">hola@veridia.com</a>
+                    </p>
+                </div>
+            </div>
+        </section>
 
-            <footer class="footer pt-14 pb-10 relative overflow-hidden">
-                 <canvas id="footer-canvas"></canvas>
-                <div class="container mx-auto px-6 relative z-10 footer-content-wrapper">
-                    <div class="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-5 gap-8 mb-8">
-                        <div class="lg:col-span-2">
-                            <h4 class="text-2xl font-bold footer-heading mb-4">Veridia</h4>
-                            <p class="text-sm footer-text mb-4" data-lang-key="footer_desc">Automatización inteligente para el futuro de los negocios.</p>
-                            <div class="flex space-x-4">
-                                <a href="#" aria-label="LinkedIn" class="footer-icon hover:text-accent transition duration-300">
-                                <i class="fab fa-linkedin-in fa-lg"></i> </a>
-                                <a href="#" aria-label="Twitter" class="footer-icon hover:text-accent transition duration-300">
-                                    <i class="fab fa-twitter fa-lg"></i>
-                                </a>
-                            </div>
-                        </div>
-                        <div>
-                            <h5 class="text-lg font-semibold footer-heading mb-4" data-lang-key="footer_nav">Navegar</h5>
-                            <ul class="space-y-2 text-sm">
-                                <li><a href="#home" class="footer-link hover:text-white transition duration-300" data-lang-key="nav_home">Inicio</a></li>
-                                <li><a href="#services" class="footer-link hover:text-white transition duration-300" data-lang-key="nav_services">Servicios</a></li>
-                                <li><a href="#approach" class="footer-link hover:text-white transition duration-300" data-lang-key="nav_approach">Enfoque</a></li>
-                                <li><a href="#value" class="footer-link hover:text-white transition duration-300" data-lang-key="nav_value">Valor</a></li>
-                                <li><a href="#contact" class="footer-link hover:text-white transition duration-300" data-lang-key="nav_contact">Contacto</a></li>
-                            </ul>
-                        </div>
-                        <div>
-                            <h5 class="text-lg font-semibold footer-heading mb-4" data-lang-key="footer_capabilities">Capacidades</h5>
-                            <ul class="space-y-2 text-sm">
-                                <li><a href="#service-ipa" class="footer-link hover:text-white transition duration-300" data-lang-key="service_ipa_short">IPA</a></li>
-                                <li><a href="#service-rpa" class="footer-link hover:text-white transition duration-300" data-lang-key="service_rpa_short">RPA Avanzado</a></li>
-                                <li><a href="#service-ai" class="footer-link hover:text-white transition duration-300" data-lang-key="service_ai_short">Integración IA</a></li>
-                                <li><a href="#service-cs" class="footer-link hover:text-white transition duration-300" data-lang-key="service_custom_short">Soluciones a Medida</a></li>
-                            </ul>
-                        </div>
-                        <div>
-                            <h5 class="text-lg font-semibold footer-heading mb-4" data-lang-key="footer_contact">Contacto</h5>
-                            <ul class="space-y-2 text-sm">
-                                <li class="flex items-center footer-text">
-                                    <i class="fas fa-envelope fa-fw footer-icon-alt mr-2 flex-shrink-0"></i>
-                                    <a href="mailto:hola@veridia.com" class="hover:text-white transition duration-300">hola@veridia.com</a>
-                                </li>
-                                </ul>
+        <footer class="footer pt-14 pb-10 relative overflow-hidden">
+            <canvas id="footer-canvas"></canvas>
+            <div class="container mx-auto px-6 relative z-10 footer-content-wrapper">
+                <div class="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-5 gap-8 mb-8 footer-grid">
+                    <div class="lg:col-span-2 footer-brand">
+                        <h4 class="text-2xl font-bold footer-heading mb-4">Veridia</h4>
+                        <p class="text-sm footer-text mb-4" data-lang-key="footer_desc">Automatización inteligente para
+                            el futuro de los negocios.</p>
+                        <div class="flex space-x-4">
+                            <a href="#" aria-label="LinkedIn"
+                                class="footer-icon hover:text-accent transition duration-300">
+                                <i data-lucide="linkedin" class="w-5 h-5"></i>
+                            </a>
+                            <a href="#" aria-label="Twitter"
+                                class="footer-icon hover:text-accent transition duration-300">
+                                <i data-lucide="twitter" class="w-5 h-5"></i>
+                            </a>
                         </div>
                     </div>
-                    <div class="border-footer-divider"></div>
-                    <div class="mt-8 text-center text-xs footer-text-alt">
-                        <p>&copy; <span id="current-year"></span> Veridia Automation Solutions. <span data-lang-key="footer_rights">Todos los derechos reservados.</span></p>
-                        <p class="mt-1">
-                            <a href="#" class="hover:text-white transition duration-300" data-lang-key="footer_privacy">Política de Privacidad</a> |
-                            <a href="#" class="hover:text-white transition duration-300" data-lang-key="footer_terms">Términos de Servicio</a>
-                        </p>
+                    <div>
+                        <h5 class="text-lg font-semibold footer-heading mb-4" data-lang-key="footer_nav">Navegar</h5>
+                        <ul class="space-y-2 text-sm">
+                            <li><a href="#home" class="footer-link hover:text-white transition duration-300"
+                                    data-lang-key="nav_home">Inicio</a></li>
+                            <li><a href="#services" class="footer-link hover:text-white transition duration-300"
+                                    data-lang-key="nav_services">Servicios</a></li>
+                            <li><a href="#approach" class="footer-link hover:text-white transition duration-300"
+                                    data-lang-key="nav_approach">Enfoque</a></li>
+                            <li><a href="#value" class="footer-link hover:text-white transition duration-300"
+                                    data-lang-key="nav_value">Valor</a></li>
+                            <li><a href="#contact" class="footer-link hover:text-white transition duration-300"
+                                    data-lang-key="nav_contact">Contacto</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h5 class="text-lg font-semibold footer-heading mb-4" data-lang-key="footer_capabilities">
+                            Capacidades</h5>
+                        <ul class="space-y-2 text-sm">
+                            <li><a href="#service-ipa" class="footer-link hover:text-white transition duration-300"
+                                    data-lang-key="service_ipa_short">IPA</a></li>
+                            <li><a href="#service-rpa" class="footer-link hover:text-white transition duration-300"
+                                    data-lang-key="service_rpa_short">RPA Avanzado</a></li>
+                            <li><a href="#service-ai" class="footer-link hover:text-white transition duration-300"
+                                    data-lang-key="service_ai_short">Integración IA</a></li>
+                            <li><a href="#service-cs" class="footer-link hover:text-white transition duration-300"
+                                    data-lang-key="service_custom_short">Soluciones a Medida</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h5 class="text-lg font-semibold footer-heading mb-4" data-lang-key="footer_contact">Contacto
+                        </h5>
+                        <ul class="space-y-2 text-sm">
+                            <li class="flex items-center footer-text">
+                                <i data-lucide="mail" class="w-4 h-4 footer-icon-alt mr-2 flex-shrink-0"></i>
+                                <a href="mailto:hola@veridia.com"
+                                    class="hover:text-white transition duration-300">hola@veridia.com</a>
+                            </li>
+                        </ul>
                     </div>
                 </div>
-            </footer>
-        </main>
+                <div class="border-footer-divider"></div>
+                <div class="mt-8 text-center text-xs footer-text-alt">
+                    <p>&copy; <span id="current-year"></span> Veridia Automation Solutions. <span
+                            data-lang-key="footer_rights">Todos los derechos reservados.</span></p>
+                    <p class="mt-1">
+                        <a href="#" class="hover:text-white transition duration-300"
+                            data-lang-key="footer_privacy">Política de Privacidad</a> |
+                        <a href="#" class="hover:text-white transition duration-300"
+                            data-lang-key="footer_terms">Términos de Servicio</a>
+                    </p>
+                </div>
+            </div>
+        </footer>
+    </main>
 
     <script src="script.js"></script>
 
 </body>
+
 </html>
